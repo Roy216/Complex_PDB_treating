@@ -1,10 +1,10 @@
 #!/usr/bin/env python
+# CHANGE HEADER TO THE SPECIFICS OF YOUR OWN SYSTEM
 
 # Import modules and packages
 import urllib.request
 import argparse
 import requests
-# from bs4 import BeautifulSoup
 import os
 
 # Parse command line arguments
@@ -29,7 +29,7 @@ f = open("page.txt", "w", encoding="utf-8")
 f.write(str(page.text))
 f.close()
 
-## Capture the ligand code from the PDB webpage if no code is given by the user
+# Capture the ligand code from the PDB webpage if no code is given by the user
 #
 # First check: subject of interest strings present in HTML?
 if ligandcode == "XXX":
@@ -60,7 +60,6 @@ if ligandcode == "XXX":
                     os.remove("page.txt")
                     exit()
 
-#
 # Second check: see if any first ligand present if no ligandcode was found during first check.
 if ligandcode == "XXX":
 
@@ -72,7 +71,6 @@ if ligandcode == "XXX":
                 print(
                     "[" + pdb + "] WARNING: No \"Subjects of Interest\" found to find the ligand code. Instead, the first specified ligand has been considered the correct one. Please check if this is correct or rerun the programme with a manual input of the ligand code using the -l flag.")
 
-#
 # Third check: if the ligandcode is still not overwritten, return an error.
 if ligandcode == "XXX":
     print(" ")
@@ -98,12 +96,13 @@ inputfile = pdb + '.pdb'
 urllib.request.urlretrieve(url_pdb, inputfile)
 
 # Execute split of target and ligand in separate PDB files
+#
 # TARGET
 proteinline = []
 chainstrs = [" " + e + " " for e in chaincodes]
 with open(inputfile) as f:
     for line in f:
-        if (((line[0:4] == "ATOM") or (line[0:4] == "TER")) and any(chain in line for chain in chainstrs)):
+        if ((line[0:4] == "ATOM") or (line[0:4] == "TER")) and any(chain in line for chain in chainstrs):
             proteinline.append(line)
 
 f = open(pdb + "_target" + ".pdb", "w")
@@ -120,9 +119,9 @@ ligchainstrs = [" " + e + " " for e in ligchaincode]
 mult_lig = "NO"
 with open(inputfile) as f:
     for line in f:
-        if (((line[0:6] == "HETATM") and (ligandcodestring in line)) and any(chain in line for chain in ligchainstrs)):
+        if ((line[0:6] == "HETATM") and (ligandcodestring in line)) and any(chain in line for chain in ligchainstrs):
             ligandline.append(line)
-        elif (((line[0:6] == "HETATM") and (testotherligand in line)) and any(chain in line for chain in ligchainstrs)):
+        elif ((line[0:6] == "HETATM") and (testotherligand in line)) and any(chain in line for chain in ligchainstrs):
             mult_lig = "YES"
 
 f = open(pdb + "_ligand" + ".pdb", "w")
@@ -164,4 +163,3 @@ else:
     print(
         "[" + pdb + "] WARNING: the PDB file contains multiple target chains, indicative of multimers. please check if the correct protein chains are included.")
     print(" ")
-
