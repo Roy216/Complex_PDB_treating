@@ -1,0 +1,10 @@
+splitcomplex.py script information
+==================================
+     PDB code: 6y0f
+     Chain(s): A
+     Ligand code: 356
+     Ligand chain(s): A
+
+     [6y0f] SUCCES
+
+==================================

@@ -4,7 +4,7 @@
 import urllib.request
 import argparse
 import requests
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 import os
 
 # Parse command line arguments
@@ -25,7 +25,7 @@ chaincodes = args.chain
 ligchaincode = args.ligandchain
 
 page = requests.get('https://www.rcsb.org/structure/' + pdb)
-f = open("page.txt", "w")
+f = open("page.txt", "w", encoding="utf-8")
 f.write(str(page.text))
 f.close()
 
@@ -33,7 +33,7 @@ f.close()
 #
 # First check: subject of interest strings present in HTML?
 if ligandcode == "XXX":
-    with open("page.txt") as file:
+    with open("page.txt", encoding="utf-8") as file:
         for item in file:
             if "</a> (Subject of Investigation/LOI)" in item:
                 if item.count("</a> (Subject of Investigation/LOI)") == 1:
@@ -64,7 +64,7 @@ if ligandcode == "XXX":
 # Second check: see if any first ligand present if no ligandcode was found during first check.
 if ligandcode == "XXX":
 
-    with open("page.txt") as file:
+    with open("page.txt", encoding="utf-8") as file:
         for item in file:
             if "var structureFirstLigand =" in item:
                 ligandcode = item[item.find(' "') + len(' "'):item.rfind('";')]
@@ -84,7 +84,7 @@ if ligandcode == "XXX":
 
 # Check if the protein is a monomer or not (potentially needing to specify multiple chains)
 monomer = "YES"
-with open("page.txt") as file:
+with open("page.txt", encoding="utf-8") as file:
     for item in file:
         if item.count("/sequence/" + pdb + "#") == 2:
             monomer = "NO"

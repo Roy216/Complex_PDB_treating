@@ -1,0 +1,7 @@
+To run on certain own systems, check the following instructions:
+
+- Run on Dell laptop in Pycharm:
+    1. Go to terminal
+    2. Go to folder where PDB files will be treated
+    3. EXECUTE:
+        C:\Users\Gebruiker\anaconda3\envs\general\python.exe ..\splitpdbcomplex.py <PDB code> <Other Options with flags>
