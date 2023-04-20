@@ -102,7 +102,7 @@ proteinline = []
 chainstrs = [" " + e + " " for e in chaincodes]
 with open(inputfile) as f:
     for line in f:
-        if ((line[0:4] == "ATOM") or (line[0:4] == "TER ")) and any(chain in line for chain in chainstrs):
+        if ((line[0:4] == "ATOM") or (line[0:3] == "TER")) and any(chain in line for chain in chainstrs):
             proteinline.append(line)
 
 f = open(pdb + "_target" + ".pdb", "w")
