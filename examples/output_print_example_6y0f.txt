@@ -8,3 +8,4 @@ splitcomplex.py script information
      [6y0f] SUCCES
 
 ==================================
+[6Y0F] WARNING: the PDB file contains multiple target chains, indicative of multimers. please check if the correct protein chains are included.

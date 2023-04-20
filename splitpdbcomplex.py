@@ -84,7 +84,7 @@ if ligandcode == "XXX":
 monomer = "YES"
 with open("page.txt", encoding="utf-8") as file:
     for item in file:
-        if item.count("/sequence/" + pdb + "#") == 2:
+        if item.count("/sequence/" + pdb + "#") != 1:
             monomer = "NO"
 
 os.remove("page.txt")
@@ -102,7 +102,7 @@ proteinline = []
 chainstrs = [" " + e + " " for e in chaincodes]
 with open(inputfile) as f:
     for line in f:
-        if ((line[0:4] == "ATOM") or (line[0:4] == "TER")) and any(chain in line for chain in chainstrs):
+        if ((line[0:4] == "ATOM") or (line[0:4] == "TER ")) and any(chain in line for chain in chainstrs):
             proteinline.append(line)
 
 f = open(pdb + "_target" + ".pdb", "w")
