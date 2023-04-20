@@ -4,8 +4,8 @@
 # Import modules and packages
 import urllib.request
 import argparse
-import requests
 import os
+import requests
 
 # Parse command line arguments
 parser = argparse.ArgumentParser()
