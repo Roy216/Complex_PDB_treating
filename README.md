@@ -8,6 +8,8 @@ The overall command to run the script is:
 
 Three files appear in the current folder as a result of running the script: the original PDB file `<PDB code>.pdb`, the PDB file `<PDB code>_target.pdb` containing the target PDB formatted coordinates, and the PDB file `<PDB code>_ligand.pdb` containing the ligand PDB formatted coordinates.
 
+**Ensure that a correct script header is adapted for your system and python environment.** 
+
 ## Repository Content
 
 * The main script is called `splitpdbcomplex.py`, situated in the root folder
