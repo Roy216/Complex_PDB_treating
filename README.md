@@ -45,14 +45,16 @@ The `splitpdbcomplex.py` script is explained stepwise. It is important to unders
 5. Create two separate files for the target and ligand.
    1. The target PDB file, `<PDB code>_target.pdb`
       1. The script reads the PDB line per line
-      2. If the first four characters of the line are equal to `ATOM` **OR** `TER_` **AND** one of the provided chain codes, surrounded by spaces, are contained in that line, the line is copied into the `<PDB code>_target.pdb` file. 
+      2. If the first four characters of the line are equal to `ATOM` **OR** the first three `TER` **AND** one of the provided chain codes, surrounded by spaces, are contained in that line, the line is copied into the `<PDB code>_target.pdb` file. 
    2. The ligand PDB file, `<PDB code>_ligand.pdb`
          1. The script reads the PDB line per line
          2. If the first six characters of the line are equal to `HETATM` **AND** the line contains the ligand code (extracted or given), separated by two spaces, **AND** the ligand chains are contained within the line, this line is copied into the `<PDB code>_ligand.pdb` file.
 6. Some information is printed to the terminal (see `examples/output_print_example_<PDB code>.txt`).
 
 
-The steps that are undertaken above are based on tested examples. All possible scenarios that we came across are therefore taken into account in the script. **However, this does not give any guarantee as to the perfect execution of every single example.**
+The steps that are undertaken above are based on tested examples. All possible scenarios that we came across are therefore taken into account in the script. 
+
+**However, this does not give any guarantee as to the perfect execution of every single example.**
 
 ### Known scenarios the script does not cover
 * **6TX6**
