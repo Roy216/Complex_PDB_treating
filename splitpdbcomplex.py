@@ -84,7 +84,8 @@ if ligandcode == "XXX":
 monomer = "YES"
 with open("page.txt", encoding="utf-8") as file:
     for item in file:
-        if item.count("/sequence/" + pdb + "#") != 1:
+        if item.count("/sequence/" + pdb + "#") > 1:
+            print("No. of Sequences Found: " + str(item.count("/sequence/" + pdb + "#")))
             monomer = "NO"
 
 os.remove("page.txt")
