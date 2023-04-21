@@ -106,11 +106,11 @@ with open(inputfile) as f:
     for line in f:
         if ((line[0:4] == "ATOM") or (line[0:3] == "TER")) and any(chain in line for chain in chainstrs):
             proteinline.append(line)
-        else:
+        elif (line[0:4] == "ATOM") or (line[0:3] == "TER"):
             chainscenario = "ANAMOLOUS"
             for chain in chainstrs:
                 pattern = r"[A-Z]\s" + chain[1] + r"(\d+)"
-                if len(re.findall(pattern, line)) > 0 and ((line[0:4] == "ATOM") or (line[0:3] == "TER")):
+                if len(re.findall(pattern, line)) > 0:
                     proteinline.append(line)
 
 f = open(pdb + "_target" + ".pdb", "w")
@@ -132,11 +132,11 @@ with open(inputfile) as f:
         elif ((line[0:6] == "HETATM") and (testotherligand in line)) and any(chain in line for chain in ligchainstrs):
             ligandline.append(line)
             mult_lig = "YES"
-        else:
+        elif line[0:6] == "HETATM":
             chainscenario = "ANAMOLOUS"
             for chain in ligchainstrs:
                 pattern = ligandcode + r"\s" + chain[1] + r"(\d+)"
-                if len(re.findall(pattern, line)) > 0 and (line[0:6] == "HETATM"):
+                if len(re.findall(pattern, line)) > 0:
                     ligandline.append(line)
 
 f = open(pdb + "_ligand" + ".pdb", "w")
