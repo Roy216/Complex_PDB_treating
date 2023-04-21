@@ -136,7 +136,6 @@ with open(inputfile) as f:
             chainscenario = "ANAMOLOUS"
             for chain in ligchainstrs:
                 pattern = ligandcode + r"\s" + chain[1] + r"(\d+)"
-                print(pattern)
                 if len(re.findall(pattern, line)) > 0 and (line[0:6] == "HETATM"):
                     ligandline.append(line)
 
