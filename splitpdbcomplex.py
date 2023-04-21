@@ -43,7 +43,7 @@ if ligandcode == "XXX":
                 else:
                     print(" ")
                     print(
-                        "[" + pdb + "] WARNING: Multiple \"Subjects of Interest\" found. This programme can handle only one. Please rerun and specify the ligandcode with the -l flag.")
+                        "[" + pdb + "] STOPPED: Multiple \"Subjects of Interest\" found. This programme can handle only one. Please rerun and specify the ligandcode with the -l flag.")
                     print("Programme has been stopped.")
                     print(" ")
                     os.remove("page.txt")
@@ -55,7 +55,7 @@ if ligandcode == "XXX":
                 else:
                     print(" ")
                     print(
-                        "[" + pdb + "] WARNING: Multiple \"Subjects of Interest\" found. This programme can handle only one. Please rerun and specify the ligandcode with the -l flag.")
+                        "[" + pdb + "] STOPPED: Multiple \"Subjects of Interest\" found. This programme can handle only one. Please rerun and specify the ligandcode with the -l flag.")
                     print("Programme has been stopped.")
                     print(" ")
                     os.remove("page.txt")
@@ -75,7 +75,7 @@ if ligandcode == "XXX":
 # Third check: if the ligandcode is still not overwritten, return an error.
 if ligandcode == "XXX":
     print(" ")
-    print("[" + pdb + "] WARNING: No known strings were found in the HTML code, necessary to capture the ligand code.")
+    print("[" + pdb + "] STOPPED: No known strings were found in the HTML code, necessary to capture the ligand code.")
     print("Programme has been stopped.")
     print(" ")
     os.remove("page.txt")
