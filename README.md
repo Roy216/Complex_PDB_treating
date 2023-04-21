@@ -6,7 +6,9 @@ The overall command to run the script is:
 
 `splitpdbcomplex.py <PDB code> [optional flags given below]`
 
+
 ![image info](./docs/images/demo_figure.jpg)
+
 
 Three files appear in the current folder as a result of running the script: the original PDB file `<PDB code>.pdb`, the PDB file `<PDB code>_target.pdb` containing the target PDB formatted coordinates, and the PDB file `<PDB code>_ligand.pdb` containing the ligand PDB formatted coordinates.
 
