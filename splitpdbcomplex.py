@@ -5,6 +5,7 @@
 import urllib.request
 import argparse
 import os
+import re
 import requests
 
 # Parse command line arguments
@@ -100,10 +101,17 @@ urllib.request.urlretrieve(url_pdb, inputfile)
 # TARGET
 proteinline = []
 chainstrs = [" " + e + " " for e in chaincodes]
+chainscenario = "STANDARD"
 with open(inputfile) as f:
     for line in f:
         if ((line[0:4] == "ATOM") or (line[0:3] == "TER")) and any(chain in line for chain in chainstrs):
             proteinline.append(line)
+        else:
+            chainscenario = "ANAMOLOUS"
+            for chain in chainstrs:
+                pattern = r"[A-Z]\s" + chain[1] + r"(\d+)"
+                if len(re.findall(pattern, line)) > 0 and ((line[0:4] == "ATOM") or (line[0:3] == "TER")):
+                    proteinline.append(line)
 
 f = open(pdb + "_target" + ".pdb", "w")
 f.close()
@@ -114,7 +122,7 @@ for item in proteinline:
 # LIGAND
 ligandline = []
 ligandcodestring = " " + ligandcode + " "
-testotherligand = "A" + ligandcode + ""
+testotherligand = "A" + ligandcode + " "
 ligchainstrs = [" " + e + " " for e in ligchaincode]
 mult_lig = "NO"
 with open(inputfile) as f:
@@ -122,7 +130,15 @@ with open(inputfile) as f:
         if ((line[0:6] == "HETATM") and (ligandcodestring in line)) and any(chain in line for chain in ligchainstrs):
             ligandline.append(line)
         elif ((line[0:6] == "HETATM") and (testotherligand in line)) and any(chain in line for chain in ligchainstrs):
+            ligandline.append(line)
             mult_lig = "YES"
+        else:
+            chainscenario = "ANAMOLOUS"
+            for chain in ligchainstrs:
+                pattern = ligandcode + r"\s" + chain[1] + r"(\d+)"
+                print(pattern)
+                if len(re.findall(pattern, line)) > 0 and (line[0:6] == "HETATM"):
+                    ligandline.append(line)
 
 f = open(pdb + "_ligand" + ".pdb", "w")
 f.close()
@@ -131,10 +147,13 @@ for item in ligandline:
     f.write(item)
 
 # Print information in the terminal
+if chainscenario == "ANAMOLOUS":
+    print("[" + pdb + "] WARNING: The chain codes in the PDB file deviated from the standard. Please be sure to check the PDB output files.")
+
 if mult_lig == "YES":
     print(" ")
-    print("splitcomplex.py script information")
-    print("==================================")
+    print("splitpdbcomplex.py script information")
+    print("=====================================")
     print("     PDB code: " + str(pdb))
     print("     Chain(s): " + str(chaincodes))
     print("     Ligand code: " + str(ligandcode))
@@ -143,11 +162,11 @@ if mult_lig == "YES":
     print(
         "     [" + pdb + "] WARNING: multiple ligands of the same kind but in different poses/positions identified! Do a manual check!")
     print(" ")
-    print("==================================")
+    print("=====================================")
 else:
     print(" ")
-    print("splitcomplex.py script information")
-    print("==================================")
+    print("splitpdbcomplex.py script information")
+    print("=====================================")
     print("     PDB code: " + str(pdb))
     print("     Chain(s): " + str(chaincodes))
     print("     Ligand code: " + str(ligandcode))
@@ -155,7 +174,7 @@ else:
     print(" ")
     print("     [" + pdb + "] SUCCES")
     print(" ")
-    print("==================================")
+    print("=====================================")
 
 if monomer == "YES":
     print(" ")

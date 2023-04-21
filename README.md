@@ -47,10 +47,10 @@ The `splitpdbcomplex.py` script is explained stepwise. It is important to unders
 5. Create two separate files for the target and ligand.
    1. The target PDB file, `<PDB code>_target.pdb`
       1. The script reads the PDB line per line
-      2. If the first four characters of the line are equal to `ATOM` **OR** the first three `TER` **AND** one of the provided chain codes, surrounded by spaces, are contained in that line, the line is copied into the `<PDB code>_target.pdb` file. 
-   2. The ligand PDB file, `<PDB code>_ligand.pdb`
+      2. If the first four characters of the line are equal to `ATOM` **OR** the first three `TER` **AND** one of the provided chain codes, surrounded by spaces, are contained in that line, the line is copied into the `<PDB code>_target.pdb` file. NOTE ABOUT CHAIN
+   3. The ligand PDB file, `<PDB code>_ligand.pdb`
       1. The script reads the PDB line per line
-      2. If the first six characters of the line are equal to `HETATM` **AND** the line contains the ligand code (extracted or given), separated by two spaces, **AND** the ligand chains are contained within the line, this line is copied into the `<PDB code>_ligand.pdb` file.
+      2. If the first six characters of the line are equal to `HETATM` **AND** the line contains the ligand code (extracted or given), separated by two spaces, **AND** the ligand chains are contained within the line, this line is copied into the `<PDB code>_ligand.pdb` file. NOTE ABOUT CHAIN 
       3. Additional test: multiple ligands of the same kind are often present in the PDB file (ligands in different locations or with a different binding pose). This can be indicated by a prefix `A` plus the ligand code. This is checked for and a warning is raised in case.  
 6. Some information is printed to the terminal (see `examples/output_print_example_<PDB code>.txt`).
 
